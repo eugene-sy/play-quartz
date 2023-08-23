@@ -16,7 +16,7 @@ Global / onLoad := (Global / onLoad).value.andThen { s =>
   s
 }
 
-ThisBuild / playBuildRepoName := "play-slick"
+ThisBuild / playBuildRepoName := "play-quartz"
 
 lazy val commonSettings = Seq(
   // Work around https://issues.scala-lang.org/browse/SI-9311
