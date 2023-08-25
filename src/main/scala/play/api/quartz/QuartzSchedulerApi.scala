@@ -21,8 +21,10 @@ trait QuartzSchedulerApi {
 
   def scheduler: Scheduler
 
+  @throws(classOf[SchedulerException])
   def start: Unit
 
+  @throws(classOf[SchedulerException])
   def stop: Unit
 
   @throws(classOf[SchedulerException])
