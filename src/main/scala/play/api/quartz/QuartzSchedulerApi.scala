@@ -1,27 +1,14 @@
 package play.api.quartz
 
-import com.typesafe.config.Config
+import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
-import org.quartz.CronExpression
-import org.quartz.CronScheduleBuilder
-import org.quartz.CronTrigger
-import org.quartz.Job
-import org.quartz.JobDetail
-import org.quartz.Scheduler
-import org.quartz.SchedulerException
-import org.quartz.SchedulerFactory
-import org.quartz.SimpleScheduleBuilder
-import org.quartz.Trigger
-import org.quartz.TriggerBuilder
-import play.api.inject.ApplicationLifecycle
-import play.api.ConfigLoader
 import play.api.Configuration
-import play.api.Environment
 import play.api.Logger
+import play.api.inject.ApplicationLifecycle
 
+import java.time.Duration
 import java.util.Date
 import javax.inject.Inject
-import java.time.Duration
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import scala.util.Failure
@@ -31,6 +18,7 @@ import scala.util.Try
 trait QuartzSchedulerApi {
 
   def schedulerFactory: SchedulerFactory
+
   def scheduler: Scheduler
 
   def start: Unit
@@ -117,16 +105,4 @@ final class DefaultQuartzSchedulerApi @Inject() (
     }
   }
 
-}
-
-final case class QuartzModuleConfiguration(autostart: Boolean, waitJobCompletion: Boolean)
-
-object QuartzModuleConfiguration {
-  implicit val loader: ConfigLoader[QuartzModuleConfiguration] = (c: Config, path: String) => {
-    val configBlock = c.getConfig(path)
-    QuartzModuleConfiguration(
-      configBlock.getBoolean("autostart"),
-      configBlock.getBoolean("waitJobCompletion")
-    )
-  }
 }
