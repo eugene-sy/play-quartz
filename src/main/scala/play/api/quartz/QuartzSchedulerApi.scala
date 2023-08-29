@@ -25,7 +25,13 @@ trait QuartzSchedulerApi {
   def start: Unit
 
   @throws(classOf[SchedulerException])
+  def standby: Unit
+
+  @throws(classOf[SchedulerException])
   def stop: Unit
+
+  @throws(classOf[SchedulerException])
+  def stopNotWaiting: Unit
 
   @throws(classOf[SchedulerException])
   def scheduleWithInterval(jobDetails: JobDetail, interval: Duration): Date
@@ -45,7 +51,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   private val logger: Logger = Logger(classOf[DefaultQuartzSchedulerApi])
   private val quartzModuleConfiguration: QuartzModuleConfiguration =
-    configuration.get[QuartzModuleConfiguration](QuartzModule.QuarzConfigrationKey)
+    configuration.get[QuartzModuleConfiguration](QuartzModule.QuartzConfigurationKey)
 
   bootstrap()
 
@@ -55,7 +61,11 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   override def start: Unit = scheduler.start()
 
+  override def standby: Unit = scheduler.standby()
+
   override def stop: Unit = scheduler.shutdown(quartzModuleConfiguration.waitJobCompletion)
+
+  override def stopNotWaiting: Unit = scheduler.shutdown(quartzModuleConfiguration.waitJobCompletion)
 
   override def scheduleWithInterval(jobDetails: JobDetail, interval: Duration): Date = {
     val delay = interval.toMillis

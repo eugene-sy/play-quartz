@@ -13,7 +13,7 @@ class QuartzModuleSpec extends AnyWordSpec with Matchers {
     }
 
     "provide a quartz config default path" in new WithReferenceConfig {
-      val dbsKey = ref.getOptional[QuartzModuleConfiguration](QuartzModule.QuarzConfigrationKey)
+      val dbsKey = ref.getOptional[QuartzModuleConfiguration](QuartzModule.QuartzConfigurationKey)
       dbsKey mustBe Some(QuartzModuleConfiguration(autostart = true, waitJobCompletion = true))
     }
   }
@@ -26,6 +26,12 @@ class QuartzModuleSpec extends AnyWordSpec with Matchers {
     "bind QuartzSchedulerApi to DefaultQuartzSchedulerApi" in {
       val api = injector.instanceOf[QuartzSchedulerApi]
       api mustBe a[DefaultQuartzSchedulerApi]
+    }
+
+    "bind QuartzSchedulerApi as a singleton" in {
+      val api1 = injector.instanceOf[QuartzSchedulerApi]
+      val api2 = injector.instanceOf[QuartzSchedulerApi]
+      api1 mustEqual api2
     }
   }
 }

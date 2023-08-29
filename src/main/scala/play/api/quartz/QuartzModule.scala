@@ -8,9 +8,9 @@ import play.api.inject.Binding
 import play.api.inject.Module
 
 object QuartzModule {
-  final val QuarzConfigrationKey = "play.quartz.config"
-  final val AutostartKey         = "autostart"
-  final val WaitJobCompletionKey = "waitJobCompletion"
+  final val QuartzConfigurationKey = "play.quartz.config"
+  final val AutostartKey           = "autostart"
+  final val WaitJobCompletionKey   = "waitJobCompletion"
 }
 
 @Singleton
