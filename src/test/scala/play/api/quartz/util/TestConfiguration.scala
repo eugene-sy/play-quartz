@@ -29,10 +29,10 @@ object TestConfiguration {
   }
 
   trait AutostartSUT extends SUT {
-    lazy val config = TestConfiguration.autostartConfiguration
+    val config = TestConfiguration.autostartConfiguration
   }
 
   trait NonAutostartSUT extends SUT {
-    lazy val config = TestConfiguration.nonAutostartConfiguration
+    val config = TestConfiguration.nonAutostartConfiguration
   }
 }

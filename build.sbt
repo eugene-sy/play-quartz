@@ -52,3 +52,6 @@ def mimaSettings = Seq(
     }
   }
 )
+
+Test / parallelExecution := false
+Test / fork := false

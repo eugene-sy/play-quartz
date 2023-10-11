@@ -55,9 +55,9 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   bootstrap()
 
-  override def schedulerFactory: SchedulerFactory = new StdSchedulerFactory()
+  override lazy val schedulerFactory: SchedulerFactory = new StdSchedulerFactory()
 
-  override def scheduler: Scheduler = schedulerFactory.getScheduler
+  override lazy val scheduler: Scheduler = schedulerFactory.getScheduler
 
   override def start: Unit = scheduler.start()
 

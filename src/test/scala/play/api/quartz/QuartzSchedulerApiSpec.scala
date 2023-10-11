@@ -12,8 +12,16 @@ class QuartzSchedulerApiAutostartSpec extends AnyWordSpec with Matchers with Sca
       api.scheduler mustNot be(null)
     }
 
+    "return the same instance of Quartz scheduler when requested multiple times" in new AutostartSUT {
+      api.scheduler mustBe api.scheduler
+    }
+
     "return an instance of Quartz scheduler factory" in new AutostartSUT {
       api.schedulerFactory mustNot be(null)
+    }
+
+    "return the same instance of Quartz scheduler factory when requested multiple times" in new AutostartSUT {
+      api.schedulerFactory mustBe api.schedulerFactory
     }
 
     "return a started instance of scheduler in autostart configuration" in new AutostartSUT {
