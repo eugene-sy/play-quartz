@@ -14,7 +14,7 @@ class QuartzModuleSpec extends AnyWordSpec with Matchers {
 
     "provide a quartz config default path" in new WithReferenceConfig {
       val dbsKey = ref.getOptional[QuartzModuleConfiguration](QuartzModule.QuartzConfigurationKey)
-      dbsKey mustBe Some(QuartzModuleConfiguration(autostart = true, waitJobCompletion = true))
+      dbsKey mustBe Some(QuartzModuleConfiguration(waitJobCompletion = true))
     }
   }
 

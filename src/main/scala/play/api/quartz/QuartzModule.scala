@@ -16,8 +16,6 @@ object QuartzModule {
 @Singleton
 final class QuartzModule extends Module {
   def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
-    val config = configuration.underlying
-
     Seq(bind[QuartzSchedulerApi].to[DefaultQuartzSchedulerApi].in[Singleton])
   }
 }

@@ -102,10 +102,8 @@ final class DefaultQuartzSchedulerApi @Inject() (
   }
 
   private def bootstrap(): Unit = {
-    if (quartzModuleConfiguration.autostart) {
-      logger.info("Starting Quartz Scheduler")
-      start
-    }
+    logger.info("Starting Quartz Scheduler")
+    start
 
     lifecycle.addStopHook { () =>
       Future {
