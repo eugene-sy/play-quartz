@@ -9,7 +9,6 @@ import play.api.inject.Module
 
 object QuartzModule {
   final val QuartzConfigurationKey = "play.quartz.config"
-  final val AutostartKey           = "autostart"
   final val WaitJobCompletionKey   = "waitJobCompletion"
 }
 

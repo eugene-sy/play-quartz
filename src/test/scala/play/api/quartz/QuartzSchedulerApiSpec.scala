@@ -1,11 +1,10 @@
 package play.api.quartz
 
-import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.quartz.util.TestConfiguration.SUT
 
-class QuartzSchedulerApiAutostartSpec extends AnyWordSpec with Matchers with ScalaFutures {
+class QuartzSchedulerApiAutostartSpec extends AnyWordSpec with Matchers {
   "QuartzSchedulerApi" must {
     "return an instance of Quartz scheduler" in new SUT {
       api.scheduler mustNot be(null)
