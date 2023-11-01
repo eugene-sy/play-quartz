@@ -11,6 +11,7 @@ import java.util.Date
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
+import scala.concurrent.duration.FiniteDuration
 import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
@@ -34,7 +35,7 @@ trait QuartzSchedulerApi {
   def stopNotWaiting: Unit
 
   @throws(classOf[SchedulerException])
-  def scheduleWithInterval(jobDetails: JobDetail, interval: Duration): Date
+  def scheduleWithInterval(jobDetails: JobDetail, interval: FiniteDuration): Date
 
   @throws(classOf[SchedulerException])
   def scheduleWithCron(jobDetails: JobDetail, expression: String): Date
@@ -67,7 +68,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   override def stopNotWaiting: Unit = scheduler.shutdown(quartzModuleConfiguration.waitJobCompletion)
 
-  override def scheduleWithInterval(jobDetails: JobDetail, interval: Duration): Date = {
+  override def scheduleWithInterval(jobDetails: JobDetail, interval: FiniteDuration): Date = {
     val delay = interval.toMillis
 
     val trigger = TriggerBuilder
@@ -79,6 +80,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
           .withIntervalInMilliseconds(delay)
           .repeatForever()
       )
+      .forJob(jobDetails.getKey)
       .build()
     scheduler.scheduleJob(jobDetails, trigger)
   }
@@ -88,6 +90,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
       .newTrigger()
       .startNow()
       .withSchedule(CronScheduleBuilder.cronSchedule(expression))
+      .forJob(jobDetails.getKey)
       .build()
     scheduler.scheduleJob(jobDetails, trigger)
   }
@@ -97,6 +100,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
       .newTrigger()
       .startNow()
       .withSchedule(CronScheduleBuilder.cronSchedule(expression))
+      .forJob(jobDetails.getKey)
       .build()
     scheduler.scheduleJob(jobDetails, trigger)
   }
