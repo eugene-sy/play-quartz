@@ -1,4 +1,4 @@
-package play.api.quartz
+package io.github.eugenesy.play.api.quartz
 
 import play.api.Configuration
 import play.api.Environment

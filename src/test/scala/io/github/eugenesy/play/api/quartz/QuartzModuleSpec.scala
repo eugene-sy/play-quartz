@@ -1,9 +1,9 @@
-package play.api.quartz
+package io.github.eugenesy.play.api.quartz
 
+import io.github.eugenesy.play.api.quartz.util.WithReferenceConfig
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.quartz.util.WithReferenceConfig
 
 class QuartzModuleSpec extends AnyWordSpec with Matchers {
 

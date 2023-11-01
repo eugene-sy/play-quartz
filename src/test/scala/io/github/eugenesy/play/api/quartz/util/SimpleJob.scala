@@ -1,4 +1,4 @@
-package play.api.quartz.util
+package io.github.eugenesy.play.api.quartz.util
 
 import org.quartz.Job
 import org.quartz.JobExecutionContext

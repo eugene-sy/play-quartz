@@ -1,4 +1,4 @@
-package play.api.quartz
+package io.github.eugenesy.play.api.quartz
 
 import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory

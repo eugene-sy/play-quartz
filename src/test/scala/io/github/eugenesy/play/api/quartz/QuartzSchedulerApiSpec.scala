@@ -1,12 +1,13 @@
-package play.api.quartz
+package io.github.eugenesy.play.api.quartz
 
+import io.github.eugenesy.play.api.quartz.util.SimpleJob
+import io.github.eugenesy.play.api.quartz.util.TestConfiguration.SUT
 import org.quartz.CronExpression
 import org.quartz.JobBuilder
 import org.quartz.JobKey
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import play.api.quartz.util.SimpleJob
-import play.api.quartz.util.TestConfiguration.SUT
+import io.github.eugenesy.play.api.quartz.util.TestConfiguration.SUT
 
 import scala.concurrent.duration.DurationInt
 

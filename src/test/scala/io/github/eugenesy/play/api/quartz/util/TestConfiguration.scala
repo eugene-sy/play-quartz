@@ -1,8 +1,8 @@
-package play.api.quartz.util
+package io.github.eugenesy.play.api.quartz.util
 
+import io.github.eugenesy.play.api.quartz.QuartzSchedulerApi
 import play.api.Configuration
 import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.quartz.QuartzSchedulerApi
 
 object TestConfiguration {
 

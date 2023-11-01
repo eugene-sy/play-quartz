@@ -1,4 +1,4 @@
-package play.api.quartz
+package io.github.eugenesy.play.api.quartz
 
 import com.typesafe.config.ConfigFactory
 import org.scalatest.matchers.must.Matchers
