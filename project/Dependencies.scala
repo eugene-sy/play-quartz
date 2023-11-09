@@ -2,7 +2,7 @@ import sbt._
 
 object Version {
   val play          = _root_.play.core.PlayVersion.current
-  val playScalaTest = "6.0.0-M6"
+  val playScalaTest = "7.0.0"
   val quartz        = "2.3.2"
 }
 
