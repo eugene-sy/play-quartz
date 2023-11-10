@@ -6,9 +6,8 @@ import play.api.Configuration
 import play.api.Logger
 import play.api.inject.ApplicationLifecycle
 
-import java.time.Duration
 import java.util.Date
-import javax.inject.Inject
+import com.google.inject.Inject
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import scala.concurrent.duration.FiniteDuration
