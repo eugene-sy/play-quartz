@@ -7,8 +7,12 @@ import play.api.inject.Module
 import com.google.inject.Singleton
 
 object QuartzModule {
+
+  /** path in the **reference.conf** to obtain the plugin configuration */
   final val QuartzConfigurationKey = "play.quartz.config"
-  final val WaitJobCompletionKey   = "waitJobCompletion"
+
+  /** configuration property for the graceful shutdown */
+  final val WaitJobCompletionKey = "waitJobCompletion"
 }
 
 @Singleton
