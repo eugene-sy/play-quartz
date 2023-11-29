@@ -15,6 +15,22 @@ import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
 
+/**
+ * Generic interface of the Quartz API instance. `QuartzSchedulerApi` provides access to Quartz scheduler factory and
+ * scheduler. It also provides helper methods for job scheduling.
+ *
+ * You should not create the instance of `QuartzSchedulerApi` directly. Rather, you should rely on the dependency
+ * injection.
+ *
+ * ===Example===
+ *
+ * Here is an example of how you can use the dependency injection to obtain an instance of `QuartzSchedulerApi`:
+ * {{{
+ *   class Application @Inject()(quartzApi: QuartzSchedulerApi) {
+ *     // ...
+ *   }
+ * }}}
+ */
 trait QuartzSchedulerApi {
 
   def schedulerFactory: SchedulerFactory
