@@ -1,5 +1,10 @@
 # Play-Quartz
 
+The Play-Quartz module makes Quartz a first-class citizen of [Play](https://www.playframework.com). It consists of two features:
+
+- Integration of Quartz into Play lifecycle;
+- Simple shorthand API to the Quartz scheduler functionality.
+
 ## Current version
 
 To use play-quartz, you need to add the following dependencies:
