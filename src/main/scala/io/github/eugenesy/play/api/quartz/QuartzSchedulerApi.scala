@@ -33,28 +33,129 @@ import scala.util.Try
  */
 trait QuartzSchedulerApi {
 
+  /*
+   * Returns an instance of Quarts `SchedulerFactory`
+   *
+   * It can be used to produce additional named schedulers or list all available schedulers
+   *
+   * ===Example===
+   *
+   * {{{
+   *   class Application @Inject()(quartzApi: QuartzSchedulerApi) {
+   *     val factory = quartzApi.schedulerFactory()
+   *     val named = factory.getScheduler("named")
+   *     factory.getAllSchedulers()
+   *   }
+   * }}}
+   */
   def schedulerFactory: SchedulerFactory
 
+  /*
+   * Returns an instance of Quartz `Scheduler`
+   */
   def scheduler: Scheduler
 
+  /*
+   * Starts the default scheduler
+   *
+   * @throws SchedulerException
+   *   if scheduler shutdown was called or if there is an issue with the scheduler
+   */
   @throws(classOf[SchedulerException])
   def start: Unit
 
+  /*
+   * Pauses the scheduler, the scheduler can be restarted afterwards
+   *
+   * @throws SchedulerException
+   *   if scheduler shutdown was called or if there is an issue with the scheduler
+   */
   @throws(classOf[SchedulerException])
   def standby: Unit
 
+  /*
+   * Permanently stops the scheduler. Depending on the configuration, it will wait for job completion
+   *
+   * @throws SchedulerException
+   */
   @throws(classOf[SchedulerException])
   def stop: Unit
 
+  /*
+   * Permanently stops the scheduler without delay. Running jobs will be terminated without waiting for completion.
+   *
+   * @throws SchedulerException
+   */
   @throws(classOf[SchedulerException])
   def stopNotWaiting: Unit
 
+  /*
+   * Schedules a job using default scheduler with a given interval.
+   *
+   * @throws SchedulerException
+   *   if job cannot be added to the scheduler or if there is an internal scheduler error
+   *
+   * === Example ===
+   * {{{
+   *   class SimpleJob extends Job with Logging {
+   *     @throws[JobExecutionException]
+   *     override def execute(arg0: JobExecutionContext): Unit = {
+   *       logger.error("This is a quartz job!")
+   *     }
+   *   }
+   *
+   *   class Application @Inject()(quartzApi: QuartzSchedulerApi) {
+   *     quartzApi.scheduleWithCron(job, 1.minute)
+   *   }
+   * }}}
+   */
   @throws(classOf[SchedulerException])
   def scheduleWithInterval(jobDetails: JobDetail, interval: FiniteDuration): Date
 
+  /*
+   * Schedules a job using default scheduler with a given cron string.
+   *
+   * @throws SchedulerException
+   *   if job cannot be added to the scheduler,cron expression is not correct
+   *   or if there is an internal scheduler error
+   *
+   * === Example ===
+   * {{{
+   *   class SimpleJob extends Job with Logging {
+   *     @throws[JobExecutionException]
+   *     override def execute(arg0: JobExecutionContext): Unit = {
+   *       logger.error("This is a quartz job!")
+   *     }
+   *   }
+   *
+   *   class Application @Inject()(quartzApi: QuartzSchedulerApi) {
+   *     quartzApi.scheduleWithCron(job, "* * 12 * * ?")
+   *   }
+   * }}}
+   */
   @throws(classOf[SchedulerException])
   def scheduleWithCron(jobDetails: JobDetail, expression: String): Date
 
+  /*
+   * Schedules a job using default scheduler with a given cron expression.
+   *
+   * @throws SchedulerException
+   *   if job cannot be added to the scheduler or if there is an internal scheduler error
+   *
+   * === Example ===
+   * {{{
+   *   class SimpleJob extends Job with Logging {
+   *     @throws[JobExecutionException]
+   *     override def execute(arg0: JobExecutionContext): Unit = {
+   *       logger.error("This is a quartz job!")
+   *     }
+   *   }
+   *
+   *   class Application @Inject()(quartzApi: QuartzSchedulerApi) {
+   *     quartzApi.scheduleWithCron(job, new CronExpression("* * 12 * * ?"))
+   *   }
+   * }}}
+   */
   @throws(classOf[SchedulerException])
   def scheduleWithCron(jobDetails: JobDetail, expression: CronExpression): Date
 }
@@ -71,8 +172,14 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   bootstrap()
 
+  /*
+   * Provides a singleton `SchedulerFactory` instance
+   */
   override lazy val schedulerFactory: SchedulerFactory = new StdSchedulerFactory()
 
+  /*
+   * Provides the default singleton `Scheduler` instance
+   */
   override lazy val scheduler: Scheduler = schedulerFactory.getScheduler
 
   override def start: Unit = scheduler.start()
