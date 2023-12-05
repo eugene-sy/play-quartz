@@ -10,7 +10,7 @@ The Play-Quartz module makes Quartz a first-class citizen of [Play](https://www.
 To use play-quartz, you need to add the following dependencies:
 
 ```scala
-libraryDependencies += "io.github.eugenesy" %% "play-quartz" % "0.1.0"
+libraryDependencies += "io.github.eugene-sy" %% "play-quartz" % "0.1.0"
 ```
 
 ## Getting started

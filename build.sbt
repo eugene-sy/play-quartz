@@ -25,10 +25,10 @@ lazy val commonSettings = Seq(
   crossScalaVersions := Seq("2.13.11", "3.3.1"), // scala213, scala331
   pomExtra           := scala.xml.NodeSeq.Empty, // Can be removed when dropping interplay
   developers += Developer(
-    "playframework",
-    "The Play Framework Contributors",
-    "contact@playframework.com",
-    url("https://github.com/playframework")
+    "eugene-sy",
+    "Eugene Sypachev",
+    "eugene.sypachev@gmail.com",
+    url("https://github.com/eugene-sy")
   ),
 )
 
