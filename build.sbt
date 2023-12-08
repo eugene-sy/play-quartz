@@ -16,9 +16,11 @@ Global / onLoad := (Global / onLoad).value.andThen { s =>
   s
 }
 
-ThisBuild / playBuildRepoName := "play-quartz"
+val projectName = "play-quartz"
+ThisBuild / playBuildRepoName := projectName
 
 lazy val commonSettings = Seq(
+  name := projectName,
   organization := "io.github.eugene-sy",
   // Work around https://issues.scala-lang.org/browse/SI-9311
   scalacOptions ~= (_.filterNot(_ == "-Xfatal-warnings")),
@@ -31,6 +33,7 @@ lazy val commonSettings = Seq(
     "eugene.sypachev@gmail.com",
     url("https://github.com/eugene-sy")
   ),
+  licenses := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
 )
 
 lazy val `play-quartz` = (project in file("."))
