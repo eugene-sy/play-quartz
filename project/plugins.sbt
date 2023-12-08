@@ -14,6 +14,6 @@ addSbtPlugin("com.typesafe"  % "sbt-mima-plugin" % "1.1.3")
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.5.12")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.21")
-addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.2.1")
+addSbtPlugin("com.github.sbt" % "sbt-pgp"      % "2.2.1")
 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
