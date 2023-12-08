@@ -21,6 +21,7 @@ ThisBuild / playBuildRepoName := projectName
 
 lazy val commonSettings = Seq(
   name := projectName,
+  description := "The Play-Quartz module makes Quartz a first-class citizen of Play.",
   organization := "io.github.eugene-sy",
   // Work around https://issues.scala-lang.org/browse/SI-9311
   scalacOptions ~= (_.filterNot(_ == "-Xfatal-warnings")),
@@ -34,6 +35,7 @@ lazy val commonSettings = Seq(
     url("https://github.com/eugene-sy")
   ),
   licenses := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+  publishTo := sonatypePublishToBundle.value,
 )
 
 lazy val `play-quartz` = (project in file("."))
@@ -60,3 +62,6 @@ def mimaSettings = Seq(
 
 Test / parallelExecution := false
 Test / fork              := false
+
+ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+ThisBuild / sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
