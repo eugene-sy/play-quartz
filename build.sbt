@@ -19,6 +19,7 @@ Global / onLoad := (Global / onLoad).value.andThen { s =>
 ThisBuild / playBuildRepoName := "play-quartz"
 
 lazy val commonSettings = Seq(
+  organization := "io.github.eugene-sy",
   // Work around https://issues.scala-lang.org/browse/SI-9311
   scalacOptions ~= (_.filterNot(_ == "-Xfatal-warnings")),
   scalaVersion       := "2.13.11",               // scala213,
@@ -33,6 +34,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val `play-quartz` = (project in file("."))
+  .settings(commonSettings)
   .settings(libraryDependencies ++= Dependencies.core)
   .enablePlugins(PlayLibrary, Playdoc, MimaPlugin)
   .configs(Docs)
