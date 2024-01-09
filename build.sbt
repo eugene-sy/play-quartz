@@ -34,9 +34,14 @@ lazy val commonSettings = Seq(
     "eugene.sypachev@gmail.com",
     url("https://github.com/eugene-sy")
   ),
-  licenses  := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
-  publishTo := sonatypePublishToBundle.value,
-  sonatypeProfileName    := "io.github.eugene-sy",
+  licenses := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+  publishTo := {
+    val nexus = "https://s01.oss.sonatype.org/"
+    if (isSnapshot.value) Some("snapshots".at(nexus + "content/repositories/snapshots"))
+    else Some("releases".at(nexus + "service/local/staging/deploy/maven2"))
+  },
+  sonatypeProfileName := "io.github.eugene-sy",
+  publishMavenStyle   := true
 )
 
 lazy val `play-quartz` = (project in file("."))
@@ -63,6 +68,3 @@ def mimaSettings = Seq(
 
 Test / parallelExecution := false
 Test / fork              := false
-
-ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
-ThisBuild / sonatypeRepository     := "https://s01.oss.sonatype.org/service/local"
