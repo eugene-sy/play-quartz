@@ -40,8 +40,9 @@ lazy val commonSettings = Seq(
     if (isSnapshot.value) Some("snapshots".at(nexus + "content/repositories/snapshots"))
     else Some("releases".at(nexus + "service/local/staging/deploy/maven2"))
   },
-  sonatypeProfileName := "io.github.eugene-sy",
-  publishMavenStyle   := true
+  sonatypeProfileName    := "io.github.eugene-sy",
+  publishMavenStyle      := true,
+  sonatypeCredentialHost := "s01.oss.sonatype.org"
 )
 
 lazy val `play-quartz` = (project in file("."))
