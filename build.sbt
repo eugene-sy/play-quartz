@@ -36,6 +36,7 @@ lazy val commonSettings = Seq(
   ),
   licenses  := Seq("APL2" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
   publishTo := sonatypePublishToBundle.value,
+  sonatypeProfileName    := "io.github.eugene-sy",
 )
 
 lazy val `play-quartz` = (project in file("."))
