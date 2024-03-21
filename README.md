@@ -10,7 +10,7 @@ The Play-Quartz module makes Quartz a first-class citizen of [Play](https://www.
 To use play-quartz, you need to add the following dependencies:
 
 ```scala
-libraryDependencies += "io.github.eugene-sy" %% "play-quartz" % "0.1.0"
+libraryDependencies += "io.github.eugene-sy" %% "play-quartz" % "0.0.2"
 ```
 
 ## Getting started
@@ -57,6 +57,11 @@ class Application @Inject()(quartzApi: QuartzSchedulerApi) {
 ```
 
 Note, that additional schedulers must be added to Play lifecycle or closed manually. 
+
+## Changelog
+
+* v0.0.2 -- Play 3.0 support
+* v0.0.1 -- proof of concept, supports Play 2.9
 
 ## Copyright
 
