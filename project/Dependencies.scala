@@ -8,8 +8,8 @@ object Version {
 }
 
 object Library {
-  val playLogback   = "com.typesafe.play"      %% "play-logback"       % Version.play
-  val playCore      = "com.typesafe.play"      %% "play"               % Version.play
+  val playLogback   = "org.playframework"      %% "play-logback"       % Version.play
+  val playCore      = "org.playframework"      %% "play"               % Version.play
   val playScalaTest = "org.scalatestplus.play" %% "scalatestplus-play" % Version.playScalaTest
 
   val guice = "com.google.inject" % "guice" % Version.guice
