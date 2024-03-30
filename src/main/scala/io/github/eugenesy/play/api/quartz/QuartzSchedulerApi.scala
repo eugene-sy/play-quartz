@@ -8,6 +8,8 @@ import play.api.inject.ApplicationLifecycle
 
 import java.util.Date
 import com.google.inject.Inject
+import io.github.eugenesy.play.api.quartz.injectable.InjectableJobFactory
+
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import scala.concurrent.duration.FiniteDuration
@@ -162,6 +164,7 @@ trait QuartzSchedulerApi {
 
 final class DefaultQuartzSchedulerApi @Inject() (
     configuration: Configuration,
+    jobFactory: InjectableJobFactory,
     lifecycle: ApplicationLifecycle
 )(implicit executionContext: ExecutionContext)
     extends QuartzSchedulerApi {
@@ -229,6 +232,7 @@ final class DefaultQuartzSchedulerApi @Inject() (
 
   private def bootstrap(): Unit = {
     logger.info("Starting Quartz Scheduler")
+    scheduler.setJobFactory(jobFactory)
     start
 
     lifecycle.addStopHook { () =>
