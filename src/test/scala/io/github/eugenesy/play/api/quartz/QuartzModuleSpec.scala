@@ -1,5 +1,7 @@
 package io.github.eugenesy.play.api.quartz
 
+import io.github.eugenesy.play.api.quartz.injectable.InjectableJobFactory
+import io.github.eugenesy.play.api.quartz.injectable.SimpleInjectableJobFactory
 import io.github.eugenesy.play.api.quartz.util.WithReferenceConfig
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -32,6 +34,17 @@ class QuartzModuleSpec extends AnyWordSpec with Matchers {
       val api1 = injector.instanceOf[QuartzSchedulerApi]
       val api2 = injector.instanceOf[QuartzSchedulerApi]
       api1 mustEqual api2
+    }
+
+    "bind InjectableJobFactory to SimpleInjectableJobFactory" in {
+      val factory = injector.instanceOf[InjectableJobFactory]
+      factory mustBe a[SimpleInjectableJobFactory]
+    }
+
+    "bind InjectableJobFactory as a singleton" in {
+      val factory1 = injector.instanceOf[InjectableJobFactory]
+      val factory2 = injector.instanceOf[InjectableJobFactory]
+      factory1 mustEqual factory2
     }
   }
 }
