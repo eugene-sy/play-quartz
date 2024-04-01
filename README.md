@@ -58,8 +58,45 @@ class Application @Inject()(quartzApi: QuartzSchedulerApi) {
 
 Note, that additional schedulers must be added to Play lifecycle or closed manually. 
 
+## Guice support
+
+The Quartz jobs must have a parameterless constructor. 
+Quartz initializes the job classes and ignores setters, fields, and annotations provided in the class definition. 
+
+To overcome the problem the module provides the custom Quartz job factory (`InjectableJobFactory`) and the job interface (`InjectableJob`)
+that indicates the need for special handling.
+
+Note, that since Quartz uses the parameterless constructor to instantiate the job classes the constructor injection cannot be used.
+The setter or field injection must be used for the dependencies.
+
+```scala
+class SimpleJob extends InjectableJob with Logging {
+  
+  // field injection
+  @Inject()
+  var serviceA: ServiceA = null
+ 
+  var serviceB: ServiceB = null
+  
+  // setter injection
+  @Inject()
+  def setServiceB(b: ServiceB) = {
+    this.serviceB = b
+  }
+ 
+  @throws[JobExecutionException]
+  override def execute(arg0: JobExecutionContext): Unit = {
+    logger.error("This is a quartz job!")
+  }
+}
+```
+
+The usage of `null` in scala code is generally not advised. It is used in example code to keep it short.
+Substitute the empty state of the injectable dependencies with a different approach suitable for your situation.
+
 ## Changelog
 
+* v0.0.3 -- Guice dependency injection support
 * v0.0.2 -- Play 3.0 support
 * v0.0.1 -- proof of concept, supports Play 2.9
 

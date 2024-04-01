@@ -5,6 +5,8 @@ import play.api.Environment
 import play.api.inject.Binding
 import play.api.inject.Module
 import com.google.inject.Singleton
+import io.github.eugenesy.play.api.quartz.injectable.InjectableJobFactory
+import io.github.eugenesy.play.api.quartz.injectable.SimpleInjectableJobFactory
 
 object QuartzModule {
 
@@ -17,7 +19,9 @@ object QuartzModule {
 
 @Singleton
 final class QuartzModule extends Module {
-  def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
-    Seq(bind[QuartzSchedulerApi].to[DefaultQuartzSchedulerApi].in[Singleton])
-  }
+  def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] =
+    Seq(
+      bind[InjectableJobFactory].to[SimpleInjectableJobFactory].in[Singleton],
+      bind[QuartzSchedulerApi].to[DefaultQuartzSchedulerApi].in[Singleton]
+    )
 }
