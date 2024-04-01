@@ -8,7 +8,7 @@ import org.quartz.simpl.SimpleJobFactory
 import org.quartz.spi.TriggerFiredBundle
 
 /**
- * Quartz job factory utilizing Guice dependency injection capabilities
+ * Quartz job factory utilizing Guice dependency injection capabilities.
  *
  * Quartz jobs extending `InjectableJob` interface, provided by he plugin have their fields and setters annotated with
  * `@Inject` annotation are provided with their dependencies. The jobs extending the default Quartz interface or any
@@ -52,6 +52,6 @@ abstract class InjectableJobFactory extends SimpleJobFactory {
 }
 
 /**
- * Default implementation of the InjectableJobFactory
+ * Default implementation of the `InjectableJobFactory`.
  */
 class SimpleInjectableJobFactory @Inject() (override val injector: Injector) extends InjectableJobFactory

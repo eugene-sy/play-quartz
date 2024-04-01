@@ -7,7 +7,6 @@ import org.quartz.JobBuilder
 import org.quartz.JobKey
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import io.github.eugenesy.play.api.quartz.util.TestConfiguration.SUT
 
 import scala.concurrent.duration.DurationInt
 
